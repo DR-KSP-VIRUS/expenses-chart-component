@@ -13,8 +13,17 @@
 
 
 <script setup>
+import { onMounted } from 'vue';
 import GraphHeader from "./components/GraphHeader.vue";
 import GraphContainer from './components/GraphContainer.vue';
+import { useGraphStore } from './stores/graphStore';
+
+
+const graphStore = useGraphStore();
+
+onMounted(async() => {
+  await graphStore.loadTransactions();
+})
 </script>
 
 <style scoped>

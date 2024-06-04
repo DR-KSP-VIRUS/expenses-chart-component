@@ -19,6 +19,7 @@ const graphStore = useGraphStore();
 .amount {
   margin-right: 2rem;
   align-self: center;
+  padding-top: 1rem;
 }
 .amount h2 {
   font-size: 2rem;

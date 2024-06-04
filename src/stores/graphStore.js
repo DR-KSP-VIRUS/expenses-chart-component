@@ -1,10 +1,10 @@
 import { fetchData } from '@/apis/graphApi';
+import { toTitleCase } from '@/helpers/textConvertor'
 import { defineStore } from 'pinia';
 
 export const useGraphStore = defineStore('graphStore', {
     state: () => ({
         transactions: [],
-        loading: false,
     }),
     getters: {
         getBalance() {
@@ -12,17 +12,33 @@ export const useGraphStore = defineStore('graphStore', {
                 return acc += transaction.amount;
             }, 0);
         },
-        async getTransactions() {
+        getChartData() {
+            return {
+                labels: this.transactions.map(d => toTitleCase(d.day)),
+                datasets: [
+                    {
+                        backgroundColor: [
+                            '#1963a3',
+                            '#a34019',
+                            '#1ea319',
+                            '#19a391',
+                            '#9719a3',
+                        ],
+                        // label: 'Daily Expense',
+                        data: this.transactions.map(d => d.amount)
+                    }
+                ]
+            }
+        },
+    },
+    actions: {
+        async loadTransactions() {
             try {
-                this.loading = true;
-                const res = await fetchData()
-                this.transactions = res;
-                this.loading = false;
+                const res = await fetchData();
+                this.transactions = await res;
             } catch (error) {
-                this.loading = false;
                 console.log(error);
             }
         }
     },
-
 });
