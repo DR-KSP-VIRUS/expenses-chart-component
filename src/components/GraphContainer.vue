@@ -1,7 +1,7 @@
 <template>
     <h2>Spendings last 7 days</h2>
     <div class="graph">
-      <Graph :chartdata="getChartData" :options="chartOptions"/>
+      <Graph :chartdata="getChartData" :colors="getBgGenerator"/>
     </div>
     <div class="graph-summary">
       <GraphSummary />
@@ -9,31 +9,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { storeToRefs } from "pinia";
 import { useGraphStore } from "@/stores/graphStore";
 import Graph from './Graph.vue';
 import GraphSummary from "./GraphSummary.vue";
 
 const graphStore = useGraphStore();
-const { getChartData } = storeToRefs(graphStore);
+const { getChartData, getBgGenerator } = storeToRefs(graphStore);
 
-const chartOptions = ref({
-  plugins: {
-    tooltip: {
-      events: ['click'],
-      callbacks: {
-        title: function (context) {
-          return ''
-        },
-        label: function (context) {
-          return `$ ${context.formattedValue}`
-        },
-      }
-    },
-
-  }
-});
 
 </script>
 

@@ -18,11 +18,13 @@
   --medium-brown: hsl(28, 10%, 53%);
   --cream: hsl(27, 66%, 92%);
   --very-pale-orange: hsl(33, 100%, 98%);
+  /* --cyan: #ec775f; */
 }
 
 html,
 body {
   height: 100%;
   background: var(--cream);
-  font-size: 18px
+  font-size: 18px;
+  /* color: #fdc6bb */
 }

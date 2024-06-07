@@ -1,70 +1,81 @@
 <template>
-    <Bar :data="chartdata" :options="options"/>
+    <Bar :data="chartdata" :options="chartOptions"/>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { Bar } from 'vue-chartjs';
 import { Chart as Chartjs, Title, Tooltip, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { onUnmounted } from 'vue';
 
+
 Chartjs.register(Title, Tooltip, BarElement, CategoryScale, LinearScale);
+
 
 const props = defineProps({
   chartdata: {
     type: Object,
   },
-  options: {
-    type:Object
-  },
+  colors: {
+    type:Array,
+  }
 });
 
 
 onUnmounted(() => {
-  
+
   Chartjs.unregister()
-})
+});
 
-// const dailyChartData = ref(
-//   {
-//     chartdata: {
-//       labels: props.transactions.map(d=>d.day),
-//       datasets: [
-//         {
-//           backgroundColor: [
-//             '#1963a3',
-//             '#a34019',
-//             '#1ea319',
-//             '#19a391',
-//             '#9719a3',
-//           ],
-//           // label: 'Daily Expense',
-//           data: props.transactions.map(d=>d.amount)
-//         }
-//       ]
-//     },
-//     options: {
-//       plugins: {
-//         tooltip: {
-//           events: ['click'],
-//           callbacks: {
-//             title: function (context) {
-//               return ''
-//             },
-//             label: function (context) {
-//               return `$ ${context.formattedValue}`
-//             },
-//           }
-//         },
 
-//       }
-//     }
-// });
-
+const chartOptions = ref({
+  plugins: {
+    tooltip: {
+      events: ['mousemove'],
+      backgroundColor: 'black',
+      position: 'nearest',
+      xAlign: 'center',
+      yAlign: 'bottom',
+      callbacks: {
+        title: function (context) {
+          return ''
+        },
+        label: function (context) {
+          return `$ ${context.formattedValue}`
+        },
+        labelColor:function (context) {
+          return { 
+            borderColor: 'rgb(0, 0, 0)',
+            backgroundColor: 'rgb(0, 0, 0)',
+            borderWidth: 'none',
+            borderRadius: 0,
+          }
+        }
+      }
+    },
+  },
+  scales: {
+    y: {
+      display:false,
+      grid: {
+        display:false
+      }
+    },
+    x: {
+      grid: {
+        display:false
+      }
+    }
+  },
+  onHover: function (e) {
+    let element = this.getElementsAtEventForMode(e, 'nearest',
+      { intersect: true }, true);
+    this.data.datasets[0].backgroundColor = [...props.colors];
+    if (element[0]) {
+      this.data.datasets[element[0].datasetIndex].backgroundColor[element[0].index] = '#fdc6bb';
+    }
+    this.update();
+  },
+});
 
 </script>
-
-<style scoped>
-.d {
-  background-color: #f87979;
-}
-</style>

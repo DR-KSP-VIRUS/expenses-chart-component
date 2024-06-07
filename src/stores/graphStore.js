@@ -1,5 +1,5 @@
 import { fetchData } from '@/apis/graphApi';
-import { toTitleCase } from '@/helpers/textConvertor'
+import { bgGenerator, toTitleCase } from '@/helpers/textConvertor'
 import { defineStore } from 'pinia';
 
 export const useGraphStore = defineStore('graphStore', {
@@ -17,19 +17,19 @@ export const useGraphStore = defineStore('graphStore', {
                 labels: this.transactions.map(d => toTitleCase(d.day)),
                 datasets: [
                     {
-                        backgroundColor: [
-                            '#1963a3',
-                            '#a34019',
-                            '#1ea319',
-                            '#19a391',
-                            '#9719a3',
-                        ],
+                        backgroundColor: this.getBgGenerator,
                         // label: 'Daily Expense',
-                        data: this.transactions.map(d => d.amount)
-                    }
-                ]
+                        data: this.transactions.map(d => d.amount),
+                        borderRadius: 5,
+                    },
+                ],
+                borderWidth: 0,
             }
         },
+
+        getBgGenerator() {
+            return bgGenerator(this.transactions);
+        }
     },
     actions: {
         async loadTransactions() {
