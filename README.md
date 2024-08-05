@@ -62,4 +62,4 @@ Users are able to:
 ## Author
 
 - Frontend Mentor - [@Dr.KSP-VIRUS](https://www.frontendmentor.io/profile/DR.KSP-VIRUS)
-- Twitter - [@kuma_sampson](https://www.twitter.com/kuma_sampson)
+- Twitter - [@kuma_sampson](https://x.com/kuma_sampson)
