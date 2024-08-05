@@ -37,8 +37,8 @@ Users are able to:
 
 ### Links
 
-- Solution URL: [Github Code ](https://your-solution-url.com)
-- Live Site URL: [Live Site](https://your-live-site-url.com)
+- Solution URL: [Github Code ](https://github.com/DR-KSP-VIRUS/expenses-chart-component)
+- Live Site URL: [Live Site](https://expenses-chart-component-one-kappa.vercel.app/)
 
 ## My process
 
@@ -49,9 +49,9 @@ Users are able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [Vue.js](https://nextjs.org/) - React framework
-- [Vue-Chartjs](https://styled-components.com/) - For Bar chart
-- [axios](https://styled-components.com/) - For Data fetching
+- [Vue.js](https://vuejs.org/) - React framework
+- [Vue-Chartjs](https://vue-chartjs.org/) - For Bar chart
+- [axios](https://https://axios-http.com/docs/intro) - For Data fetching
 
 
 ### Useful resources
